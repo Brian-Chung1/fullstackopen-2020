@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/notes/5feac32b96b4ef1fc82b9607
+Content-Type: application/json
+
+{
+    "content": "my mind is blown",
+    "important": true
+}
