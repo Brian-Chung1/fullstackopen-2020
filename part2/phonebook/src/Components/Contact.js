@@ -1,12 +1,12 @@
 import React from "react";
 
-export const Contact = ({ name, number, deletePerson }) => {
+export const Contact = ({ person, onDelete }) => {
   return (
     <div>
       <div>
-        {name} : {number}
+        {person.name} : {person.number}
       </div>
-      <button onClick={deletePerson}>Delete</button>
+      <button onClick={() => onDelete(person.id)}>Delete</button>
     </div>
   );
 };

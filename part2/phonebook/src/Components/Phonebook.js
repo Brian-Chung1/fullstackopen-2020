@@ -1,23 +1,11 @@
 import React from "react";
 import Contact from "./Contact";
-import personService from "../Services/person";
 
-export const Phonebook = ({ persons, deletePerson }) => {
+export const Phonebook = ({ persons, onDelete }) => {
   return (
     <>
       {persons.map((person) => (
-        <Contact
-          key={person.name}
-          name={person.name}
-          number={person.number}
-          deletePerson={() => {
-            if (window.confirm(`Delete ${person.name}`)) {
-              deletePerson(person.id);
-            } else {
-              return;
-            }
-          }}
-        />
+        <Contact key={person.name} person={person} onDelete={onDelete} />
       ))}
     </>
   );

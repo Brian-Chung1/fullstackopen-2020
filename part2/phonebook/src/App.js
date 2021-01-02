@@ -48,31 +48,37 @@ const App = () => {
     }, 3000);
   };
 
+  const resetFields = () => {
+    setNewName("");
+    setNewNumber("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newName.trim() === "" || newNumber.trim() === "") {
       errorNotification("Please fill both fields");
       return;
     }
-    if (persons.some((person) => person.name === newName)) {
+
+    const person = persons.find((p) => p.name === newName);
+    if (person) {
       if (
         window.confirm(
           `${newName} is already added to the phone book, replace the old number with a new one?`
         )
       ) {
-        const person = persons.find((person) => person.name === newName);
         const newPerson = { ...person, number: newNumber };
         personService.update(person.id, newPerson).then((updatedPerson) => {
           setPersons(
             persons.map((p) => (p.id !== person.id ? p : updatedPerson))
           );
           successNotification(`Updated ${person.name}'s number`);
-          setNewName("");
-          setNewNumber("");
+          resetFields();
         });
 
         return;
       } else {
+        resetFields();
         return;
       }
     }
@@ -80,28 +86,35 @@ const App = () => {
       name: newName,
       number: newNumber,
     };
-    personService.create(personObject).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-      successNotification(`Added ${returnedPerson.name}`);
-      setNewName("");
-      setNewNumber("");
-    });
+    personService
+      .create(personObject)
+      .then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        successNotification(`Added ${returnedPerson.name}`);
+        resetFields();
+      })
+      .catch((error) => {
+        errorNotification(error.response.data.error);
+      });
   };
 
   const deletePerson = (id) => {
-    const name = persons.find((person) => person.id === id).name;
-    personService
-      .deleteDB(id)
-      .then((returnedPersons) => {
-        successNotification(`Deleted ${name}`);
-        setPersons(persons.filter((person) => person.id !== id));
-      })
-      .catch((error) => {
-        errorNotification(
-          `Information of ${name} has already been removed from the server`
-        );
-        console.log(error);
-      });
+    const person = persons.find((p) => p.id === id);
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService
+        .deleteContact(id)
+        .then(() => {
+          setPersons(persons.filter((p) => p.id !== id));
+          successNotification(`Successfully deleted ${person.name}`);
+          setFilter("");
+        })
+        .catch((error) => {
+          errorNotification(
+            `The information on ${person.name} has already been removed from the server`
+          );
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -117,14 +130,11 @@ const App = () => {
         nameVal={newName}
         numVal={newNumber}
       />
-      <div>debug name: {newName}</div>
       <h2>Numbers</h2>
-      {filter === "" && (
-        <Phonebook deletePerson={deletePerson} persons={persons} />
-      )}
+      {filter === "" && <Phonebook onDelete={deletePerson} persons={persons} />}
       {filter !== "" && (
         <Phonebook
-          deletePerson={deletePerson}
+          onDelete={deletePerson}
           persons={persons.filter((person) =>
             person.name.toLowerCase().includes(filter.toLowerCase())
           )}
