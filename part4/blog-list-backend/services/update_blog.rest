@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs/5a422bc61b54a676234d17fc
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjVmZjk1MjJhYjE4YjgyMTg2ODJlNzJkMyIsImlhdCI6MTYxMDE3NTE3OH0.7YGY_GvJvtMye87DP5w8Z9kBNtWgL2CP13WwtAHHRSE
+
+{
+    "title": "im dumber",
+    "author": "brianteethhurts",
+    "url": "www.google.com",
+    "likes": "0"
+}
