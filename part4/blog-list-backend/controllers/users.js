@@ -4,7 +4,6 @@ const User = require('../models/user');
 
 userRouter.get('/', async (request, response, next) => {
   try {
-    const body = request.body;
     const users = await User.find({}).populate('blogs', {
       title: 1,
       author: 1,
@@ -22,7 +21,7 @@ userRouter.post('/', async (request, response, next) => {
     const body = request.body;
     if (body.password === undefined || body.username === undefined) {
       return response.status(400).json({
-        error: 'Content Missing',
+        error: 'Missing password or username',
       });
     }
     if (body.password.length < 3 || body.username.length < 3) {
@@ -41,7 +40,7 @@ userRouter.post('/', async (request, response, next) => {
     });
 
     const savedUser = await user.save();
-    response.json(savedUser.toJSON());
+    response.json(savedUser);
   } catch (exception) {
     next(exception);
   }

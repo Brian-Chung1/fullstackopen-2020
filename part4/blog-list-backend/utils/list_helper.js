@@ -2,10 +2,9 @@ const dummy = (blogs) => {
   return 1;
 };
 
-const totalLikes = (blogs) =>
-  blogs
-    .map((blog) => blog.likes)
-    .reduce((total, currentBlogLike) => total + currentBlogLike, 0);
+const totalLikes = (blogs) => {
+  blogs.reduce((total, blog) => total + blog.likes, 0);
+};
 
 const notFunctionalFavoriteBlog = (blogs) => {
   let current = blogs[0];
@@ -33,7 +32,7 @@ const notFunctionalMostBlogs = (blogs) => {
   const map = new Map();
 
   let res = {
-    author: "",
+    author: '',
     blogs: 0,
   };
 
@@ -56,7 +55,7 @@ const notFunctionalMostBlogs = (blogs) => {
 const mostBlogs = (blogs) => {
   if (blogs.length === 0) return null;
   let res = {
-    author: "",
+    author: '',
     blogs: 0,
   };
 
@@ -79,7 +78,7 @@ const notFunctionalMostLikes = (blogs) => {
   const map = new Map();
 
   let res = {
-    author: "",
+    author: '',
     likes: 0,
   };
 
@@ -104,7 +103,7 @@ const notFunctionalMostLikes = (blogs) => {
 const mostLikes = (blogs) => {
   if (blogs.length === 0) return null;
   let res = {
-    author: "",
+    author: '',
     likes: 0,
   };
 
