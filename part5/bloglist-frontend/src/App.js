@@ -85,7 +85,8 @@ const App = () => {
         setBlogs(blogs.filter((b) => b.id !== blog.id));
         successNotification(`Deleted ${blog.title} by ${blog.author}`);
       } catch (err) {
-        errorNotification(err);
+        errorNotification(`${err.message}: ${err.response.statusText}`);
+        console.log({ err });
       }
     }
   };
@@ -151,20 +152,24 @@ const App = () => {
 
       <div>
         <p>{`${user.username} logged in`}</p>
-        <button onClick={handleLogout}>logout</button>
+        <button id="logout-button" onClick={handleLogout}>
+          logout
+        </button>
         {blogForm()}
       </div>
 
-      {blogs
-        .sort((a, b) => b.likes - a.likes)
-        .map((blog) => (
-          <Blog
-            key={blog.id}
-            blog={blog}
-            handleBlogLike={handleBlogLike}
-            handleBlogRemove={handleBlogRemove}
-          />
-        ))}
+      <div className="blogList">
+        {blogs
+          .sort((a, b) => b.likes - a.likes)
+          .map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              handleBlogLike={handleBlogLike}
+              handleBlogRemove={handleBlogRemove}
+            />
+          ))}
+      </div>
     </div>
   );
 };

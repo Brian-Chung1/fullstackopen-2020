@@ -12,7 +12,6 @@ describe('<BlogForm />', () => {
     const title = component.container.querySelector('#title');
     const author = component.container.querySelector('#author');
     const url = component.container.querySelector('#url');
-    const form = component.container.querySelector('.blogForm');
     const button = component.container.querySelector('.createBlogButton');
 
     fireEvent.change(title, {
@@ -30,7 +29,7 @@ describe('<BlogForm />', () => {
     fireEvent.click(button);
 
     expect(createBlog.mock.calls).toHaveLength(1);
-    // console.log(JSON.stringify(createBlog.mock.calls[0][0].title, null, 2));
+    console.log(JSON.stringify(createBlog.mock.calls[0][0].title, null, 2));
     expect(createBlog.mock.calls[0][0].title).toBe('ReactJS');
     expect(createBlog.mock.calls[0][0].author).toBe('Dan Abramov');
     expect(createBlog.mock.calls[0][0].url).toBe('https://reactjs.org/');

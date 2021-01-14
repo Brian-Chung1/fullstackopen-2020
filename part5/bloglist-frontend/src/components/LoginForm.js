@@ -13,17 +13,21 @@ export const LoginForm = ({
       <h1>Log in to application</h1>
       username
       <input
+        id="username"
         type="text"
         value={username}
         onChange={handleUsernameChange}
       ></input>
       password
       <input
+        id="password"
         type="text"
         value={password}
         onChange={handlePasswordChange}
       ></input>
-      <button onClick={handleLogin}>login</button>
+      <button id="login-button" onClick={handleLogin}>
+        login
+      </button>
     </div>
   );
 };

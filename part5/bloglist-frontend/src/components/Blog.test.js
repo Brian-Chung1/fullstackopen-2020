@@ -36,7 +36,7 @@ describe('<Blog />', () => {
 
   test('default render has title and author only', () => {
     const blogComponent = component.container.querySelector('.blog');
-    // console.log(prettyDOM(blogComponent));
+    console.log(prettyDOM(blogComponent));
     expect(component.container).toHaveTextContent('test blog user');
   });
 
@@ -46,7 +46,7 @@ describe('<Blog />', () => {
     const blogDetails = component.container.querySelector('.blogDetails');
     expect(blogDetails).toBeDefined();
     expect(blogDetails).toHaveTextContent('www.google.com1liketestUserremove');
-    // console.log(prettyDOM(blogDetails));
+    console.log(prettyDOM(blogDetails));
   });
 
   test('like button clicked twice', () => {
