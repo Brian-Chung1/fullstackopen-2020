@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs/5ffcd3adddecc22d44cbde7d
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjVmZmEyZjZkYzBiYWVmMWI4NDhiM2VkMCIsImlhdCI6MTYxMDQwNDc0Nn0.fkmgMKNmYauB96rU3IdNjkCTr8RZodh2LMKj-1sdww4
+
+{
+    "title": "i know you are dumb",
+    "author": "brian",
+    "url": "www.google.com",
+    "likes": "0"
+}
