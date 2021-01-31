@@ -6,7 +6,7 @@ import {
   addBlogComment,
 } from '../reducers/blogReducer';
 import { showNotificationWithTimeout } from '../reducers/notificationReducer';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import {
   makeStyles,
   Card,
@@ -100,7 +100,7 @@ const Blog = () => {
         </Typography>
         <Typography className={classes.pos}>{`added by ${author}`}</Typography>
         <Typography variant="body2" component="p">
-          {url}
+          <a href={url}>{url}</a>
         </Typography>
         <CardActions>
           <Typography>{`${likes} likes`}</Typography>
